@@ -2,6 +2,8 @@
 
 // TODO: domínio definitivo.
 export const BASE_URL = "https://marketingsovida-star.github.io/ossentis";
+// Enquanto true, o site pede para não aparecer no Google. Trocar para false no lançamento (e tirar o robots do index.html).
+export const EM_APROVACAO: boolean = true;
 export const asset = (p: string) => `${import.meta.env.BASE_URL.replace(/\/$/, "")}${p}`;
 
 export type Item = { nome: string; qtd: string; nota?: string };

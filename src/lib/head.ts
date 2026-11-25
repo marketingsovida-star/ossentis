@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BASE_URL } from "@/data/produtos";
+import { BASE_URL, EM_APROVACAO } from "@/data/produtos";
 
 type HeadOptions = {
   title: string;
@@ -38,7 +38,7 @@ export function useHead({ title, description, path, ogType = "website", ogImage,
     const url = `${BASE_URL}${path}`;
     document.title = title;
     setMeta("name", "description", description);
-    setMeta("name", "robots", noindex ? "noindex, nofollow" : "index, follow");
+    setMeta("name", "robots", EM_APROVACAO || noindex ? "noindex, nofollow" : "index, follow");
     setMeta("property", "og:title", title);
     setMeta("property", "og:description", description);
     setMeta("property", "og:type", ogType);
