@@ -36,7 +36,7 @@ export function ProdutoAtivos({ rotulo, titulo, descricao }: { rotulo: string; t
   );
 
   return (
-    <section id="produto" className={`campo-capsulas flex scroll-mt-14 items-center overflow-hidden px-5 py-10 sm:px-8 lg:min-h-[calc(100svh-60px)] lg:py-6`} aria-labelledby={`t-produto`}>
+    <section id="produto" className={`flex scroll-mt-14 items-center overflow-hidden px-5 py-10 sm:px-8 lg:min-h-[calc(100svh-60px)] lg:py-6`} aria-labelledby={`t-produto`}>
       <div className="mx-auto w-full max-w-[80rem]">
         <div className="grid items-center gap-6 lg:grid-cols-[minmax(0,42rem)_auto] lg:justify-center lg:gap-16">
           <Reveal className="text-center lg:text-left">

@@ -113,15 +113,14 @@ export function HomePage() {
       <Header home visivel={visivel} />
       <main>
         <Hero refHero={refHero} />
+        <div className="campo-claro">
         <ProdutoAtivos
           rotulo="Saúde óssea e articular · 60 cápsulas"
           titulo={<>Ossos e articulações <span className="text-vivo">cuidados em uma só fórmula</span></>}
           descricao="Colágeno tipo II, ácido hialurônico, MSM e cúrcuma para as articulações. Magnésio e vitaminas C, D e K2 para os ossos. Oito ativos em duas cápsulas ao dia, para quem quer continuar se movendo com liberdade."
         />
-        <div className="campo-azul h-2.5 sm:h-3" />
         <Beneficios />
-        <div className="bg-bruma">
-          <Compra />
+        <Compra />
         </div>
         <div className="campo-azul">
           <Diferenciais />

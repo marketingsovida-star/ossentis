@@ -37,7 +37,7 @@ export function Beneficios() {
   };
 
   return (
-    <section id="beneficios" className="flex scroll-mt-14 items-center overflow-hidden bg-gelo px-5 py-10 sm:px-8 lg:min-h-[calc(100svh-60px)] lg:py-6" aria-labelledby="t-ben">
+    <section id="beneficios" className="flex scroll-mt-14 items-center overflow-hidden px-5 py-10 sm:px-8 lg:min-h-[calc(100svh-60px)] lg:py-6" aria-labelledby="t-ben">
       <div className="mx-auto w-full max-w-[76rem]">
         <h2 id="t-ben" className="text-center text-balance text-3xl font-bold leading-tight tracking-tight sm:text-[2.6rem]">O que a Ossentis <span className="text-vivo">faz por você</span></h2>
         <p className="mx-auto mt-2 max-w-[38em] text-center text-lg text-suave">Um cuidado para a articulação inteira, para você seguir no seu ritmo.</p>

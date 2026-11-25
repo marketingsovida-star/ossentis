@@ -22,7 +22,14 @@ button { cursor: pointer; }
     radial-gradient(ellipse 42% 180% at 87% 115%, color-mix(in oklab, #1957b2 60%, transparent), transparent 72%),
     linear-gradient(103deg, #173e69 0%, #173e69 38%, #1a4b8c 68%, #1957b2 100%);
 }
-.campo-capsulas { background: radial-gradient(ellipse 60% 80% at 90% 10%, #cfe6f2, transparent 70%), radial-gradient(ellipse 50% 70% at 0 100%, #dcebf8, transparent 70%), #f5fafd; }
+/* fundo único das seções claras: os brilhos atravessam as seções, sem emenda entre elas */
+.campo-claro {
+  background:
+    radial-gradient(ellipse 55% 30rem at 100% 14%, #d6e9f3, transparent),
+    radial-gradient(ellipse 50% 34rem at 0 38%, #deecf7, transparent),
+    radial-gradient(ellipse 55% 34rem at 100% 68%, #d9ebf4, transparent),
+    #f5fafd;
+}
 
 /* botão com brilho (padrão Duet / Viva One) */
 .brilho { position: relative; overflow: hidden; isolation: isolate; transition: transform .22s ease-out, background-color .22s, box-shadow .22s; }
