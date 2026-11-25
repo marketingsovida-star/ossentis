@@ -23,7 +23,6 @@ button { cursor: pointer; }
     linear-gradient(103deg, #173e69 0%, #173e69 38%, #1a4b8c 68%, #1957b2 100%);
 }
 .campo-capsulas { background: radial-gradient(ellipse 60% 80% at 90% 10%, #cfe6f2, transparent 70%), radial-gradient(ellipse 50% 70% at 0 100%, #dcebf8, transparent 70%), #f5fafd; }
-.campo-gel { background: radial-gradient(ellipse 60% 80% at 10% 10%, #e9f5f7, transparent 70%), radial-gradient(ellipse 60% 80% at 100% 100%, #9fcdd6, transparent 70%), #b9dce1; }
 
 /* botão com brilho (padrão Duet / Viva One) */
 .brilho { position: relative; overflow: hidden; isolation: isolate; transition: transform .22s ease-out, background-color .22s, box-shadow .22s; }
@@ -47,7 +46,7 @@ button { cursor: pointer; }
 .z-liquido { fill: #b9dce1; }
 .z-osso { fill: #fff; stroke: #bcd6e6; stroke-width: 2; }
 .z-cart { fill: none; stroke: #8fbcd4; stroke-width: 11; stroke-linecap: round; stroke-linejoin: round; }
-.on.z-pele, .on.z-musculo { fill: #78ace0; }
+.on.z-musculo { fill: #78ace0; }
 .on.z-liquido, .on.z-osso { fill: #1957b2; stroke: #1957b2; }
 .on.z-cart { stroke: #1957b2; }
 

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Activity, ArrowRight, Bone, Layers, Snowflake, Zap } from "lucide-react";
-import { PRODUTOS } from "@/data/produtos";
+import { Activity, ArrowRight, Bone, Layers, Zap } from "lucide-react";
 
 const BS = [
   { zona: "osso", icon: Bone, titulo: "Sustenta seus ossos", texto: "Reúne o que o corpo usa para absorver o cálcio e formar e manter os ossos.", ativos: "Vitamina D, vitamina K2 e magnésio" },
@@ -46,7 +45,7 @@ export function Beneficios() {
         <div className="mt-6 grid gap-5 lg:grid-cols-[minmax(0,1fr)_19rem_minmax(0,1fr)] lg:gap-8">
           <div className="grid place-items-center lg:col-start-2 lg:row-start-1">
             <svg viewBox="20 70 360 450" role="img" aria-label="Ilustração de um joelho" className="h-52 w-auto sm:h-64 lg:h-[min(24rem,50svh)]" style={{ mask: "linear-gradient(transparent, #000 12%, #000 88%, transparent)" }}>
-              <path {...z("pele")} d="M62 0C66 110 26 190 34 290C40 390 74 450 80 600H320C326 450 360 390 366 290C374 190 334 110 338 0Z" />
+              <path className="z-pele" d="M62 0C66 110 26 190 34 290C40 390 74 450 80 600H320C326 450 360 390 366 290C374 190 334 110 338 0Z" />
             <path {...z("musculo")} d="M96 0C100 120 52 200 54 300C56 390 96 440 104 600H296C304 440 344 390 346 300C348 200 300 120 304 0Z" />
             <ellipse {...z("liquido")} cx="200" cy="322" rx="134" ry="72" />
             <g {...z("osso")}><path d={FEMUR} /><path d={TIBIA} /></g>
@@ -71,10 +70,7 @@ export function Beneficios() {
           </ul>
         </div>
 
-        <div className="mt-5 grid gap-3 lg:grid-cols-2 lg:gap-5">
-          <Link to={PRODUTOS.capsulas.slug} className="brilho flex items-center justify-center gap-3 rounded-md bg-vivo px-6 py-4 text-center text-lg font-semibold leading-tight text-white">Quero cuidar dos ossos e articulações <ArrowRight className="size-5 shrink-0" /></Link>
-          <Link to={PRODUTOS.gel.slug} onMouseEnter={() => setZona("pele")} onFocus={() => setZona("pele")} className="brilho flex items-center justify-center gap-3 rounded-md bg-prof px-6 py-4 text-center text-lg font-semibold leading-tight text-white"><Snowflake className="size-5 shrink-0" aria-hidden />Quero o frescor do gel <ArrowRight className="size-5 shrink-0" /></Link>
-        </div>
+        <Link to="/#comprar" className="brilho mx-auto mt-6 flex w-full items-center justify-center gap-3 rounded-md bg-vivo px-8 py-4 text-center text-lg font-semibold leading-tight text-white lg:max-w-xl">Quero cuidar dos ossos e articulações <ArrowRight className="size-5 shrink-0" /></Link>
       </div>
     </section>
   );

@@ -4,8 +4,7 @@ import { Headset, HeartPulse, Leaf, Menu, Plus, ShieldCheck, X, type LucideIcon 
 import { FAQ, asset } from "@/data/produtos";
 
 const NAV = [
-  ["/#capsulas", "Cápsulas"],
-  ["/#gel", "Gel"],
+  ["/#produto", "O produto"],
   ["/#beneficios", "Benefícios"],
   ["/#especialista", "Dr. Luca"],
   ["/#duvidas", "Dúvidas"],
@@ -24,14 +23,14 @@ export function Header({ home = false, visivel = true }: { home?: boolean; visiv
         <nav className="hidden items-center gap-9 lg:flex">
           {NAV.map(([to, t]) => <Link key={to} to={to} className="text-[15px] font-semibold transition-colors hover:text-vivo">{t}</Link>)}
         </nav>
-        <Link to="/#comprar" className="brilho hidden rounded-full bg-vivo px-6 py-2 text-[15px] font-semibold text-white lg:block">Kits</Link>
+        <Link to="/#comprar" className="brilho hidden rounded-full bg-vivo px-6 py-2 text-[15px] font-semibold text-white lg:block">Comprar</Link>
         <button className="-mr-2 p-2 lg:hidden" aria-label={aberto ? "Fechar menu" : "Abrir menu"} aria-expanded={aberto} onClick={() => setAberto(!aberto)}>
           {aberto ? <X /> : <Menu />}
         </button>
       </div>
       {aberto && (
         <nav className="flex flex-col border-t border-prof/10 px-5 py-2 lg:hidden">
-          {[...NAV, ["/#comprar", "Kits"] as const, ["/sac", "Atendimento"] as const].map(([to, t]) => (
+          {[...NAV, ["/#comprar", "Comprar"] as const, ["/sac", "Atendimento"] as const].map(([to, t]) => (
             <Link key={to} to={to} onClick={() => setAberto(false)} className="border-b border-prof/10 py-3 font-semibold last:border-0">{t}</Link>
           ))}
         </nav>
@@ -43,7 +42,7 @@ export function Header({ home = false, visivel = true }: { home?: boolean; visiv
 const BENEFICIOS: [LucideIcon, string][] = [
   [Headset, "Compra segura com suporte rápido"],
   [ShieldCheck, "7 dias de garantia"],
-  [HeartPulse, "Cuidado por dentro e por fora"],
+  [HeartPulse, "Cuidado com ossos e articulações"],
   [Leaf, "Ingredientes selecionados"],
 ];
 
@@ -98,7 +97,7 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-5 pb-5 pt-6 sm:px-8 sm:pt-7">
         <div className="flex flex-col items-center text-center">
           <Link to="/" aria-label="Ossentis, início"><img src={asset("/brand/logo-branco.svg")} alt="Ossentis" className="h-8 w-auto sm:h-10" /></Link>
-          <p className="mt-4 text-xs font-semibold uppercase leading-relaxed text-white/90">Não exceder a recomendação diária de consumo indicada na embalagem. Estes produtos não são medicamentos.</p>
+          <p className="mt-4 text-xs font-semibold uppercase leading-relaxed text-white/90">Não exceder a recomendação diária de consumo indicada na embalagem. Este produto não é um medicamento.</p>
         </div>
         <div className="mt-5 flex flex-col items-center justify-between gap-2 border-t border-white/20 pt-4 text-center text-xs text-white/80 sm:flex-row">
           <p>© {new Date().getFullYear()} Ossentis. Todos os direitos reservados.</p>

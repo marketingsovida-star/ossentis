@@ -1,8 +1,8 @@
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { CreditCard, Headset, HeartHandshake, ShieldCheck, Truck } from "lucide-react";
+import { ChevronDown, CreditCard, Headset, HeartHandshake, Info, Leaf, Pill, ShieldCheck, Truck } from "lucide-react";
 import { Grupo } from "@/components/embalagem";
-import { asset, type Opcao, type ProdutoId } from "@/data/produtos";
+import { asset, PRODUTO, type Opcao } from "@/data/produtos";
 
 const ABAS = [
   { label: "Garantia", icon: HeartHandshake, texto: "Você tem 7 dias de garantia após receber o pedido. Se tiver qualquer questão com a sua compra, fale com o nosso atendimento e nós resolveremos, sem burocracia." },
@@ -10,31 +10,31 @@ const ABAS = [
   { label: "Meios de envio", icon: Truck, texto: "Enviamos para todo o Brasil. O prazo é calculado pelo seu CEP e aparece no checkout antes de você finalizar o pedido." },
 ];
 
-/** Galeria + escolha de 1, 3 ou 5 (layout da venda da Duet / Viva One). Usada no kit da home e nas páginas de produto. */
-export function Compra({ ids, titulo, subtitulo, selo, opcoes, h1 = false, id }: {
-  ids: ProdutoId[]; titulo: ReactNode; subtitulo: string; selo: string; opcoes: Opcao[]; h1?: boolean; id?: string;
-}) {
+const DETALHES = [["Composição", Leaf], ["Modo de uso", Pill], ["Cuidados", Info]] as const;
+
+/** Venda do produto: galeria, escolha de 1, 3 ou 5 frascos e, logo abaixo, composição, modo de uso e cuidados. */
+export function Compra() {
   const [qtd, setQtd] = useState<Opcao["qtd"]>(3);
   const [vista, setVista] = useState<Opcao["qtd"] | "rotina">(3);
   const [aba, setAba] = useState(0);
-  const op = opcoes.find((o) => o.qtd === qtd)!;
-  const H = h1 ? "h1" : "h2";
+  const [detalhe, setDetalhe] = useState<number | null>(null);
+  const op = PRODUTO.opcoes.find((o) => o.qtd === qtd)!;
   const card = "rounded-2xl border border-prof/15 bg-white p-4 shadow-xl shadow-prof/5 sm:p-5";
   const foto = <img src={asset("/photos/movimento.webp")} alt="Mulher caminhando ao ar livre" className="size-full object-cover object-[82%_center]" />;
 
   return (
-    <section id={id} className="mx-auto max-w-[76rem] scroll-mt-14 px-4 py-8 sm:px-8 sm:py-10" aria-label="Comprar">
+    <section id="comprar" className="mx-auto max-w-[76rem] scroll-mt-14 px-4 py-8 sm:px-8 sm:py-10 lg:py-6" aria-label="Comprar">
       <div className="grid gap-5 lg:grid-cols-2 lg:gap-8">
         <div className={`flex flex-col ${card}`}>
           <div className="relative aspect-square w-full overflow-hidden rounded-xl lg:aspect-auto lg:min-h-0 lg:flex-1" style={{ background: "radial-gradient(circle at 50% 55%, #fff, #dcecf3 78%)" }}>
-            <span className="absolute left-3 top-3 z-10 rounded-full bg-prof px-3 py-1 text-xs font-semibold text-white">{selo}</span>
-            <div key={vista} className="sobe absolute inset-0">{vista === "rotina" ? foto : <Grupo ids={ids} qtd={vista} />}</div>
+            <span className="absolute left-3 top-3 z-10 rounded-full bg-prof px-3 py-1 text-xs font-semibold text-white">{PRODUTO.ficha[1][1]}</span>
+            <div key={vista} className="sobe absolute inset-0">{vista === "rotina" ? foto : <Grupo qtd={vista} />}</div>
           </div>
           <div className="mt-4 grid grid-cols-4 gap-2.5">
             {([1, 3, 5, "rotina"] as const).map((v) => (
               <button key={v} aria-label={v === "rotina" ? "Ver na rotina" : `Ver ${v}`} aria-pressed={vista === v} onClick={() => setVista(v)}
                 className={`aspect-square overflow-hidden rounded-lg border bg-bruma transition lg:aspect-[5/4] ${vista === v ? "border-vivo ring-2 ring-vivo/30" : "border-prof/15 hover:border-vivo/50"}`}>
-                {v === "rotina" ? foto : <Grupo ids={ids} qtd={v} mini />}
+                {v === "rotina" ? foto : <Grupo qtd={v} mini />}
               </button>
             ))}
           </div>
@@ -42,11 +42,11 @@ export function Compra({ ids, titulo, subtitulo, selo, opcoes, h1 = false, id }:
 
         <div className={`flex flex-col ${card}`}>
           <div className="text-center">
-            <H className="text-[1.95rem] font-bold leading-tight sm:text-[2.3rem]">{titulo}</H>
-            <p className="mt-1 font-semibold text-suave">{subtitulo}</p>
+            <h2 className="text-[1.95rem] font-bold leading-tight sm:text-[2.3rem]">Ossentis <span className="text-vivo sm:whitespace-nowrap">{PRODUTO.nome}</span></h2>
+            <p className="mt-1 font-semibold text-suave">{PRODUTO.chamada}</p>
           </div>
           <div className="mt-5 space-y-3.5" role="radiogroup" aria-label="Escolha a quantidade">
-            {opcoes.map((o) => {
+            {PRODUTO.opcoes.map((o) => {
               const on = o.qtd === qtd;
               return (
                 <button key={o.qtd} role="radio" aria-checked={on} onClick={() => { setQtd(o.qtd); setVista(o.qtd); }}
@@ -92,6 +92,40 @@ export function Compra({ ids, titulo, subtitulo, selo, opcoes, h1 = false, id }:
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="mt-5 lg:mt-6">
+        <div className="grid gap-2.5 sm:grid-cols-3 sm:gap-4">
+          {DETALHES.map(([t, I], i) => {
+            const on = detalhe === i;
+            return (
+              <button key={t} aria-expanded={on} aria-controls="detalhes" onClick={() => setDetalhe(on ? null : i)}
+                className={`flex min-h-14 items-center gap-3 rounded-xl border px-5 text-lg font-bold transition-colors ${on ? "border-vivo bg-vivo text-white" : "border-prof/15 bg-white hover:border-vivo hover:text-vivo"}`}>
+                <I className="size-5 shrink-0" aria-hidden />{t}
+                <ChevronDown className={`ml-auto size-5 shrink-0 transition-transform ${on ? "rotate-180" : ""}`} aria-hidden />
+              </button>
+            );
+          })}
+        </div>
+        {detalhe !== null && (
+          <div id="detalhes" key={detalhe} ref={(el) => el?.scrollIntoView({ behavior: "smooth", block: "nearest" })} className="scroll-mb-6 scroll-mt-20 sobe mt-3 rounded-2xl border border-prof/15 bg-white px-5 py-5 sm:px-7">
+            {detalhe === 0 && (
+              <>
+                <h3 className="border-b border-prof/15 pb-3 text-xl font-bold text-vivo">{PRODUTO.composicaoTitulo}</h3>
+                <dl className="grid sm:grid-cols-2 sm:gap-x-10">
+                  {PRODUTO.composicao.map((a) => (
+                    <div key={a.nome} className="flex justify-between gap-4 border-b border-prof/10 py-3">
+                      <dt><span className="font-semibold">{a.nome}</span>{a.nota && <span className="block text-[15px] leading-snug text-suave">{a.nota}</span>}</dt>
+                      <dd className="whitespace-nowrap font-bold">{a.qtd}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </>
+            )}
+            {detalhe === 1 && <p className="leading-relaxed">{PRODUTO.modoUso} {PRODUTO.paraQuem}</p>}
+            {detalhe === 2 && <p className="leading-relaxed">{PRODUTO.aviso}</p>}
+          </div>
+        )}
       </div>
     </section>
   );

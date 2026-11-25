@@ -4,12 +4,12 @@ import { ProdutoAtivos } from "@/components/ativos";
 import { Beneficios } from "@/components/beneficios";
 import { Compra } from "@/components/compra";
 import { Faixa, Faq, Footer, Header } from "@/components/ui";
-import { KIT_OPCOES, asset } from "@/data/produtos";
+import { asset } from "@/data/produtos";
 import { useHead } from "@/lib/head";
 
 const DIFERENCIAIS: [LucideIcon, string, string][] = [
   [Eye, "Você sabe o que está escolhendo", "Ativos e quantidades apresentados de forma clara, para uma escolha mais consciente."],
-  [HeartPulse, "Por dentro e por fora", "Cápsulas para a rotina de todos os dias e gel para o conforto na hora em que você precisa."],
+  [HeartPulse, "Cuidado completo", "Ossos, cartilagens, articulações e músculos reunidos em uma só fórmula."],
   [Leaf, "Ingredientes selecionados", "Cada fórmula nasce de uma escolha criteriosa de ativos e combinações."],
   [Stethoscope, "Ao lado de quem entende", "O Dr. Luca, reumatologista, é coprodutor da marca e acompanha de perto quem quer se mover melhor."],
   [ShieldCheck, "Transparência de verdade", "Informações completas e acessíveis para você entender melhor o que está consumindo."],
@@ -26,10 +26,10 @@ function Hero({ refHero }: { refHero: React.RefObject<HTMLElement | null> }) {
         <div className="sobe w-full max-w-[35rem] text-center sm:text-left">
           <img src={asset("/brand/logo-azul.svg")} alt="Ossentis" className="mx-auto h-12 w-auto sm:mx-0 sm:h-16" />
           <h1 className="mt-5 text-balance text-[2.5rem] font-bold leading-[1.05] tracking-tight sm:text-[3.5rem]">Cuidado articular para <span className="text-vivo">seguir em movimento</span></h1>
-          <p className="mt-5 text-lg leading-relaxed">A Ossentis cuida de ossos e articulações por dentro e por fora, para você viver o que o movimento permite.</p>
+          <p className="mt-5 text-lg leading-relaxed">Oito ativos em uma só fórmula para cuidar de ossos e articulações e viver o que o movimento permite.</p>
           <div className="mt-7 grid gap-2.5 sm:grid-cols-2 sm:gap-3">
-            <a href="#capsulas" className="brilho grid h-14 place-items-center rounded-md bg-vivo text-lg font-semibold text-white">Conhecer as cápsulas</a>
-            <a href="#gel" className="brilho grid h-14 place-items-center rounded-md bg-prof text-lg font-semibold text-white">Conhecer o gel</a>
+            <a href="#produto" className="brilho grid h-14 place-items-center rounded-md bg-vivo text-lg font-semibold text-white">Conhecer o produto</a>
+            <a href="#comprar" className="brilho grid h-14 place-items-center rounded-md bg-prof text-lg font-semibold text-white">Comprar agora</a>
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@ function Especialista() {
             <div className={`col-start-1 row-start-1 space-y-3 ${aba === 0 ? "" : "invisible"}`}>
               <p className="text-2xl font-bold leading-snug text-vivo">Da clínica para a rotina.</p>
               <p>O movimento está em tudo: no passeio, no encontro, no plano feito de última hora. É ele que dá a liberdade de escolher o próprio ritmo.</p>
-              <p>A Ossentis nasceu para proteger essa liberdade, com um cuidado que começa por dentro, em cápsulas, e continua por fora, em gel.</p>
+              <p>A Ossentis nasceu para proteger essa liberdade, com uma fórmula que reúne o cuidado com ossos, cartilagens e articulações em duas cápsulas ao dia.</p>
               <p className="font-semibold">Cuidar é abrir espaço para a vida seguir.</p>
             </div>
             <div className={`col-start-1 row-start-1 space-y-3 ${aba === 1 ? "" : "invisible"}`}>
@@ -97,7 +97,7 @@ function Especialista() {
 export function HomePage() {
   useHead({
     title: "Ossentis | Cuidado articular para seguir em movimento",
-    description: "Cuidado articular por dentro e por fora: cápsulas com oito ativos para ossos e articulações e gel de alívio para o dia a dia.",
+    description: "Cápsulas com oito ativos para o cuidado com ossos, cartilagens e articulações.",
     path: "/",
   });
   const refHero = useRef<HTMLElement>(null);
@@ -114,21 +114,14 @@ export function HomePage() {
       <main>
         <Hero refHero={refHero} />
         <ProdutoAtivos
-          id="capsulas"
           rotulo="Saúde óssea e articular · 60 cápsulas"
           titulo={<>Ossos e articulações <span className="text-vivo">cuidados em uma só fórmula</span></>}
           descricao="Colágeno tipo II, ácido hialurônico, MSM e cúrcuma para as articulações. Magnésio e vitaminas C, D e K2 para os ossos. Oito ativos em duas cápsulas ao dia, para quem quer continuar se movendo com liberdade."
         />
         <div className="campo-azul h-2.5 sm:h-3" />
-        <ProdutoAtivos
-          id="gel"
-          rotulo="Gel de Alívio · 150 g"
-          titulo={<>Frescor instantâneo, <span className="text-vivo">leveza que dura</span></>}
-          descricao="Para o fim do dia, depois de horas em pé ou sentado. Textura leve, de rápida absorção, que não gruda, ajuda a desinchar e desperta a sensação de leveza em pernas e corpo em segundos."
-        />
         <Beneficios />
         <div className="bg-bruma">
-          <Compra id="comprar" ids={["capsulas", "gel"]} titulo={<>Kit <span className="text-vivo">Cápsulas + Gel</span></>} subtitulo="Por dentro + por fora" selo="60 cápsulas + gel 150 g" opcoes={KIT_OPCOES} />
+          <Compra />
         </div>
         <div className="campo-azul">
           <Diferenciais />

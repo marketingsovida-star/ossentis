@@ -23,7 +23,7 @@ jobs:
       - run: npx vite build --base=/ossentis/
       - run: |
           cp dist/index.html dist/404.html
-          for route in saude-ossea-articular gel-de-alivio sac; do
+          for route in sac; do
             mkdir -p "dist/$route" && cp dist/index.html "dist/$route/index.html"
           done
       - uses: actions/configure-pages@v5
