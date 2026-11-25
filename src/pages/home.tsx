@@ -18,16 +18,16 @@ const DIFERENCIAIS: [LucideIcon, string, string][] = [
 
 function Hero({ refHero }: { refHero: React.RefObject<HTMLElement | null> }) {
   return (
-    <section ref={refHero} id="topo" className="relative overflow-hidden sm:min-h-svh">
-      <img src={asset("/photos/movimento.webp")} alt="Mulher de cabelos grisalhos caminhando ao ar livre, sorrindo" fetchPriority="high" className="aspect-square w-full object-cover object-[82%_20%] sm:absolute sm:inset-0 sm:size-full sm:object-[78%_25%]" />
-      <div className="pointer-events-none absolute inset-0 hidden bg-linear-to-r from-gelo/85 via-gelo/55 via-40% to-transparent to-60% sm:block" />
-      <Faixa className="py-3 sm:py-4 sm:absolute sm:inset-x-0 sm:bottom-0" />
-      <div className="relative mx-auto flex max-w-7xl items-center px-5 py-9 sm:min-h-svh sm:px-8 sm:pb-24">
-        <div className="sobe w-full max-w-[35rem] text-center sm:text-left">
-          <img src={asset("/brand/logo-azul.svg")} alt="Ossentis" className="mx-auto h-12 w-auto sm:mx-0 sm:h-16" />
-          <h1 className="mt-5 text-balance text-[2.5rem] font-bold leading-[1.05] tracking-tight sm:text-[3.5rem]">Cuidado articular para <span className="text-vivo">seguir em movimento</span></h1>
+    <section ref={refHero} id="topo" className="relative overflow-hidden lg:min-h-svh">
+      <img src={asset("/photos/movimento.webp")} alt="Mulher de cabelos grisalhos caminhando ao ar livre, sorrindo" fetchPriority="high" className="aspect-square w-full sm:aspect-[16/10] object-cover object-[82%_20%] lg:absolute lg:inset-0 lg:aspect-auto lg:size-full lg:object-[78%_25%]" />
+      <div className="pointer-events-none absolute inset-0 hidden bg-linear-to-r from-gelo/85 via-gelo/55 via-40% to-transparent to-60% lg:block" />
+      <Faixa className="py-3 sm:py-4 lg:absolute lg:inset-x-0 lg:bottom-0" />
+      <div className="relative mx-auto flex max-w-7xl items-center px-5 py-9 lg:min-h-svh lg:px-8 lg:pb-24">
+        <div className="sobe mx-auto w-full max-w-[35rem] lg:mx-0 text-center lg:text-left">
+          <img src={asset("/brand/logo-azul.svg")} alt="Ossentis" className="mx-auto h-12 w-auto lg:mx-0 lg:h-16" />
+          <h1 className="mt-5 text-balance text-[2.5rem] font-bold leading-[1.05] tracking-tight lg:text-[3.5rem]">Cuidado articular para <span className="text-vivo">seguir em movimento</span></h1>
           <p className="mt-5 text-lg leading-relaxed">Oito ativos em uma só fórmula para cuidar de ossos e articulações e viver o que o movimento permite.</p>
-          <div className="mt-7 grid gap-2.5 sm:grid-cols-2 sm:gap-3">
+          <div className="mt-7 grid gap-2.5 lg:grid-cols-2 lg:gap-3">
             <a href="#produto" className="brilho grid h-14 place-items-center rounded-md bg-vivo text-lg font-semibold text-white">Conhecer o produto</a>
             <a href="#comprar" className="brilho grid h-14 place-items-center rounded-md bg-prof text-lg font-semibold text-white">Comprar agora</a>
           </div>
