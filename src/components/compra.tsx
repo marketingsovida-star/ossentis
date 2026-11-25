@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from "react";
+import { Link } from "react-router-dom";
 import { CreditCard, Headset, HeartHandshake, ShieldCheck, Truck } from "lucide-react";
 import { Grupo } from "@/components/embalagem";
 import { asset, type Opcao, type ProdutoId } from "@/data/produtos";
@@ -70,9 +71,10 @@ export function Compra({ ids, titulo, subtitulo, selo, opcoes, h1 = false, id }:
             <button disabled className="mt-5 flex h-13 cursor-default items-center justify-center rounded-full bg-linear-to-r from-prof to-vivo text-lg font-bold text-white">Disponível em breve</button>
           )}
           <ul className="mt-4 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-suave">
-            {([[ShieldCheck, "Compra segura"], [Truck, "Entrega para todo o Brasil"], [Headset, "Suporte rápido"]] as const).map(([I, t]) => (
+            {([[ShieldCheck, "Compra segura"], [Truck, "Entrega para todo o Brasil"]] as const).map(([I, t]) => (
               <li key={t} className="flex items-center gap-1.5"><I className="size-4 text-vivo" aria-hidden />{t}</li>
             ))}
+            <li><Link to="/sac" className="flex items-center gap-1.5 underline-offset-2 hover:underline"><Headset className="size-4 text-vivo" aria-hidden />Suporte rápido</Link></li>
           </ul>
           <div className="mt-auto pt-5">
             <div className="flex flex-wrap gap-2" role="tablist" aria-label="Informações da compra">

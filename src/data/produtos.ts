@@ -113,3 +113,9 @@ export const FAQ: [string, string][] = [
   ["Quem não deve usar as cápsulas?", "Gestantes, lactantes e crianças. Quem usa medicamentos, principalmente anticoagulantes, deve consultar um profissional de saúde antes."],
   ["Substitui o acompanhamento médico?", "Não. Os produtos Ossentis fazem parte de uma rotina de cuidado e não substituem diagnóstico, consulta ou tratamento."],
 ];
+
+/* ---------- SAC ---------- */
+// Com o endpoint (POST multipart), o chamado vai direto para a equipe. Sem endpoint e com e-mail, abre o
+// e-mail do cliente preenchido. Sem nenhum dos dois, o envio fica desativado e o cliente é avisado.
+export const SAC_ENDPOINT: string = "";
+export const SAC_EMAIL: string = "";

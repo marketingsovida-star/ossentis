@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { HomePage } from "@/pages/home";
+import { SacPage } from "@/pages/sac";
 import { ProdutoPage } from "@/pages/produto";
 
 function ScrollManager() {
@@ -21,6 +22,7 @@ export function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/saude-ossea-articular" element={<ProdutoPage key="c" id="capsulas" />} />
         <Route path="/gel-de-alivio" element={<ProdutoPage key="g" id="gel" />} />
+        <Route path="/sac" element={<SacPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

@@ -24,14 +24,14 @@ export function Header({ home = false, visivel = true }: { home?: boolean; visiv
         <nav className="hidden items-center gap-9 lg:flex">
           {NAV.map(([to, t]) => <Link key={to} to={to} className="text-[15px] font-semibold transition-colors hover:text-vivo">{t}</Link>)}
         </nav>
-        <Link to="/#comprar" className="brilho hidden rounded-full bg-vivo px-6 py-2 text-[15px] font-semibold text-white lg:block">Comprar</Link>
+        <Link to="/#comprar" className="brilho hidden rounded-full bg-vivo px-6 py-2 text-[15px] font-semibold text-white lg:block">Kits</Link>
         <button className="-mr-2 p-2 lg:hidden" aria-label={aberto ? "Fechar menu" : "Abrir menu"} aria-expanded={aberto} onClick={() => setAberto(!aberto)}>
           {aberto ? <X /> : <Menu />}
         </button>
       </div>
       {aberto && (
         <nav className="flex flex-col border-t border-prof/10 px-5 py-2 lg:hidden">
-          {[...NAV, ["/#comprar", "Comprar"] as const].map(([to, t]) => (
+          {[...NAV, ["/#comprar", "Kits"] as const, ["/sac", "Atendimento"] as const].map(([to, t]) => (
             <Link key={to} to={to} onClick={() => setAberto(false)} className="border-b border-prof/10 py-3 font-semibold last:border-0">{t}</Link>
           ))}
         </nav>
@@ -85,6 +85,7 @@ export function Faq() {
             );
           })}
         </div>
+        <Link to="/sac" className="mx-auto mt-5 flex min-h-11 w-full items-center justify-center gap-2 rounded-md border border-prof/20 bg-white px-5 py-2 font-semibold transition-colors hover:border-vivo hover:text-vivo sm:w-fit"><Headset className="size-4.5 shrink-0" aria-hidden /> Ainda tem dúvidas? Fale com a nossa equipe</Link>
       </div>
     </section>
   );
