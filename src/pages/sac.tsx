@@ -2,7 +2,7 @@ import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { Check, Paperclip, X } from "lucide-react";
 import { Footer, Header } from "@/components/ui";
-import { SAC_EMAIL, SAC_ENDPOINT } from "@/data/produtos";
+import { campoSac, enviarChamadoSac } from "@/lib/sac-central";
 import { useHead } from "@/lib/head";
 
 const MOTIVOS = ["Meu pedido não chegou", "Meu pedido veio com erro", "Quero trocar ou devolver", "Dúvida sobre o produto", "Outro assunto"];
@@ -29,7 +29,7 @@ export function SacPage() {
   const [arquivos, setArquivos] = useState<File[]>([]);
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState("");
-  const [feito, setFeito] = useState<"" | "enviado" | "email">("");
+  const [feito, setFeito] = useState(false);
 
   const anexar = (lista: FileList | null) => {
     const novos = Array.from(lista ?? []);
@@ -41,29 +41,25 @@ export function SacPage() {
 
   async function enviar(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const dados = new FormData(e.currentTarget);
-    const assunto = `[SAC Ossentis] ${dados.get("motivo")}: ${dados.get("assunto")}`;
+    const form = e.currentTarget;
     setErro("");
-    if (SAC_ENDPOINT) {
-      dados.append("_subject", assunto);
-      arquivos.forEach((f, i) => dados.append(`anexo_${i + 1}`, f, f.name));
-      setEnviando(true);
-      try {
-        const r = await fetch(SAC_ENDPOINT, { method: "POST", body: dados, headers: { Accept: "application/json" } });
-        if (!r.ok) throw new Error();
-        setFeito("enviado");
-      } catch {
-        setErro("Não foi possível enviar seu chamado. Tente novamente em instantes.");
-      } finally {
-        setEnviando(false);
-      }
-    } else if (SAC_EMAIL) {
-      const corpo = [...dados].map(([k, v]) => `${k}: ${v}`).join("\n") + (arquivos.length ? "\n\n(Anexe os arquivos neste e-mail.)" : "");
-      window.location.href = `mailto:${SAC_EMAIL}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
-      setFeito("email");
-    } else {
-      // Nunca simular envio: sem destino configurado, o cliente precisa saber que o chamado não saiu.
-      setErro("O atendimento por aqui ainda não está ativo. Seu chamado não foi enviado.");
+    setEnviando(true);
+    try {
+      await enviarChamadoSac("ossentis", {
+        email: campoSac(form, "email"),
+        motivo: campoSac(form, "motivo"),
+        nome: campoSac(form, "nome"),
+        cpf: campoSac(form, "cpf"),
+        telefone: campoSac(form, "telefone"),
+        assunto: campoSac(form, "assunto"),
+        descricao: campoSac(form, "descricao"),
+        retorno: campoSac(form, "retorno"),
+      }, arquivos);
+      setFeito(true);
+    } catch (err) {
+      setErro(err instanceof Error ? err.message : "Não foi possível enviar seu chamado.");
+    } finally {
+      setEnviando(false);
     }
   }
 
@@ -78,8 +74,8 @@ export function SacPage() {
           {feito ? (
             <div role="status" className="mt-8 rounded-2xl border border-prof/15 bg-white p-8 text-center">
               <span className="mx-auto grid size-12 place-items-center rounded-full bg-vivo text-white"><Check /></span>
-              <h2 className="mt-4 text-2xl font-bold">{feito === "enviado" ? "Chamado enviado" : "Chamado preparado"}</h2>
-              <p className="mx-auto mt-2 max-w-sm text-suave">{feito === "enviado" ? "Recebemos sua mensagem e vamos responder pelo canal escolhido." : `Abrimos o seu e-mail com o chamado preenchido: é só enviar. Se não abriu, escreva para ${SAC_EMAIL}.`}</p>
+              <h2 className="mt-4 text-2xl font-bold">Chamado enviado</h2>
+              <p className="mx-auto mt-2 max-w-sm text-suave">Recebemos sua mensagem e vamos responder pelo canal escolhido.</p>
               <Link to="/" className="brilho mt-6 inline-flex h-12 items-center rounded-md bg-vivo px-7 font-semibold text-white">Voltar ao site</Link>
             </div>
           ) : (
