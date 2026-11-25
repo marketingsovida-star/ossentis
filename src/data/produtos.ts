@@ -7,6 +7,14 @@ export const asset = (p: string) => `${import.meta.env.BASE_URL.replace(/\/$/, "
 export type Item = { nome: string; qtd: string; nota?: string };
 export type ProdutoId = "capsulas" | "gel";
 
+/** Preço e link vazios = "Em breve". */
+export type Opcao = { qtd: 1 | 3 | 5; label: string; preco?: string; parcela?: string; economia?: string; selo?: string; link?: string };
+const opcoes = (um: string, varios: string): Opcao[] => [
+  { qtd: 1, label: "1 " + um },
+  { qtd: 3, label: "3 " + varios, selo: "Mais vendido" },
+  { qtd: 5, label: "5 " + varios, selo: "Melhor escolha" },
+];
+
 export type Produto = {
   id: ProdutoId;
   slug: string;
@@ -21,11 +29,9 @@ export type Produto = {
   composicaoTitulo: string;
   composicao: Item[];
   aviso: string;
-  /** Mockup da embalagem em /public. Vazio = mostra a arte da marca. */
+  /** Mockup da embalagem em /public. Vazio = mostra a silhueta ilustrada. */
   imagem?: string;
-  /** Preço e link do checkout. Vazio = "Disponível em breve". */
-  preco?: string;
-  link?: string;
+  opcoes: Opcao[];
 };
 
 export const PRODUTOS: Record<ProdutoId, Produto> = {
@@ -45,8 +51,9 @@ export const PRODUTOS: Record<ProdutoId, Produto> = {
       "Magnésio, que auxilia no funcionamento muscular",
     ],
     ficha: [["Forma", "Cápsulas"], ["Conteúdo", "60 cápsulas"], ["Porção", "2 cápsulas ao dia"]],
+    opcoes: opcoes("frasco", "frascos"),
     paraQuem: "Adultos a partir de 19 anos que querem incluir o cuidado com ossos e articulações no dia a dia.",
-    modoUso: "Ingerir 2 cápsulas ao dia.",
+    modoUso: "Ingerir 2 cápsulas ao dia, ou conforme orientação profissional.",
     composicaoTitulo: "Em cada porção de 2 cápsulas",
     composicao: [
       { nome: "Colágeno tipo II não desnaturado", qtd: "1,6 mg", nota: "O colágeno próprio da cartilagem, com a estrutura preservada." },
@@ -76,6 +83,7 @@ export const PRODUTOS: Record<ProdutoId, Produto> = {
       "Para depois de um dia longo em pé ou sentado",
     ],
     ficha: [["Forma", "Gel"], ["Conteúdo", "150 g"], ["Rendimento", "150 aplicações"]],
+    opcoes: opcoes("bisnaga", "bisnagas"),
     paraQuem: "Para o uso diário de quem sente as pernas cansadas ou passa muitas horas na mesma posição.",
     modoUso: "Aplicar sobre a pele limpa, com movimentos suaves, até a completa absorção.",
     composicaoTitulo: "Composição",
@@ -95,14 +103,7 @@ export const PRODUTOS: Record<ProdutoId, Produto> = {
   },
 };
 
-type Camada = { id: string; nome: string; texto: string; ativos: string[]; produto: ProdutoId };
-export const CAMADAS: Camada[] = [
-  { id: "cartilagem", nome: "Cartilagem", texto: "O revestimento liso que protege o encontro entre os ossos. O colágeno tipo II é a sua principal proteína estrutural.", ativos: ["Colágeno tipo II", "Vitamina C"], produto: "capsulas" },
-  { id: "liquido", nome: "Líquido sinovial", texto: "O fluido que lubrifica a articulação a cada movimento. O ácido hialurônico faz parte da sua composição natural.", ativos: ["Ácido hialurônico"], produto: "capsulas" },
-  { id: "ossos", nome: "Ossos", texto: "A sustentação do corpo, em renovação constante. Vitaminas e minerais participam desse processo.", ativos: ["Vitamina D", "Vitamina K2", "Magnésio"], produto: "capsulas" },
-  { id: "conectivo", nome: "Tecido conectivo", texto: "A estrutura que envolve e une a articulação. O enxofre é um dos elementos que a compõem.", ativos: ["MSM", "Cúrcuma"], produto: "capsulas" },
-  { id: "pele", nome: "Pele", texto: "A camada por onde o cuidado se sente primeiro: no frescor do mentol e na massagem de cada aplicação.", ativos: ["Mentol", "Arnica", "Castanha da Índia", "Nano cafeína"], produto: "gel" },
-];
+export const KIT_OPCOES = opcoes("kit", "kits");
 
 export const FAQ: [string, string][] = [
   ["Qual a diferença entre os dois produtos?", "As cápsulas são um suplemento de uso oral com oito ativos. O gel é de uso externo, aplicado sobre a pele. São dois caminhos diferentes para a mesma rotina."],

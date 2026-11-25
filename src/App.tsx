@@ -4,12 +4,12 @@ import { HomePage } from "@/pages/home";
 import { ProdutoPage } from "@/pages/produto";
 
 function ScrollManager() {
-  const { pathname, hash } = useLocation();
+  const { pathname, hash, key } = useLocation();
   useEffect(() => {
     const el = hash ? document.querySelector(hash) : null;
     if (el) el.scrollIntoView({ block: "start" });
     else window.scrollTo(0, 0);
-  }, [pathname, hash]);
+  }, [pathname, hash, key]);
   return null;
 }
 
