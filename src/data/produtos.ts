@@ -1,7 +1,7 @@
 /* ---------- Ossentis: produtos, marca e contato ---------- */
 
-// TODO: domínio definitivo.
-export const BASE_URL = "https://marketingsovida-star.github.io/ossentis";
+// Domínio oficial da Ossentis.
+export const BASE_URL = "https://ossentis.com.br";
 // Enquanto true, o site pede para não aparecer no Google. Trocar para false no lançamento (e tirar o robots do index.html).
 export const EM_APROVACAO: boolean = true;
 export const asset = (p: string) => `${import.meta.env.BASE_URL.replace(/\/$/, "")}${p}`;
