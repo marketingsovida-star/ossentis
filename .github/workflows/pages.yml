@@ -19,8 +19,8 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
       - run: npm ci
-      # Em domínio próprio, trocar a base para "/".
-      - run: npx vite build --base=/ossentis/
+      # Domínio próprio: base na raiz.
+      - run: npx vite build --base=/
       - run: |
           cp dist/index.html dist/404.html
           for route in sac; do
